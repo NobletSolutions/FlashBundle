@@ -1,0 +1,75 @@
+<?php
+
+namespace NS\FlashBundle\Service;
+
+use \Symfony\Component\HttpFoundation\Session\Session;
+use NS\FlashBundle\Interfaces\MessageStore;
+use NS\FlashBundle\Model\FlashMessage;
+
+/**
+ * Description of Messages
+ *
+ * @author gnat
+ */
+class Messages extends \Twig_Extension implements MessageStore
+{
+    private $flashBag;
+    private $template;
+    private $environment;
+
+    public function __construct(Session $session, $template)
+    {
+        $this->flashBag = $session->getFlashBag();
+        $this->template = $template;
+    }
+
+    public function initRuntime(\Twig_Environment $environment)
+    {
+        $this->environment = $environment;
+    }
+
+    public function addSuccess($header = null, $title = null, $message = null, $buttonMessage = null)
+    {
+        $this->_add('success', $header, $title, $message, $buttonMessage);
+    }
+
+    public function addWarning($header = null, $title = null, $message = null, $buttonMessage = null)
+    {
+        $this->_add('warning', $header, $title, $message, $buttonMessage);
+    }
+
+    public function addError($header = null, $title = null, $message = null, $buttonMessage = null)
+    {
+        $this->_add('error', $header, $title, $message, $buttonMessage);
+    }
+
+    public function add($header = null, $title = null, $message = null, $buttonMessage = null)
+    {
+        $this->_add('message', $header, $title, $message, $buttonMessage);
+    }
+
+    private function _add($type, $header = null, $title = null, $message = null, $buttonMessage = null)
+    {
+        $this->flashBag->add($type, new FlashMessage($header, $title, $message, $buttonMessage));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFunctions()
+    {
+        return array(
+            'flash_messages' => new \Twig_Function_Method($this, 'flash_messages',array('is_safe' => array('html')))
+        );
+    }
+
+    public function flash_messages()
+    {
+        return $this->environment->render($this->template, array('flashbag'=>$this->flashBag));
+    }
+
+    public function getName()
+    {
+        return 'flash_message';
+    }
+}
