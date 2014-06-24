@@ -13,13 +13,15 @@ use NS\FlashBundle\Model\FlashMessage;
  */
 class Messages extends \Twig_Extension implements MessageStore
 {
+    private $session;
     private $flashBag;
     private $template;
     private $environment;
 
     public function __construct(Session $session, $template)
     {
-        $this->flashBag = $session->getFlashBag();
+        $this->session  = $session;
+        $this->flashBag = ($session->isStarted()) ? $session->getFlashBag():null;
         $this->template = $template;
     }
 
@@ -50,7 +52,8 @@ class Messages extends \Twig_Extension implements MessageStore
 
     private function _add($type, $header = null, $title = null, $message = null, $buttonMessage = null)
     {
-        $this->flashBag->add($type, new FlashMessage($header, $title, $message, $buttonMessage));
+        if($this->flashBag)
+            $this->flashBag->add($type, new FlashMessage($header, $title, $message, $buttonMessage));
     }
 
     /**
