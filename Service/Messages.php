@@ -32,28 +32,36 @@ class Messages extends \Twig_Extension implements MessageStore
 
     public function addSuccess($header = null, $title = null, $message = null, $buttonMessage = null)
     {
-        $this->_add('success', $header, $title, $message, $buttonMessage);
+        return $this->_add('success', $header, $title, $message, $buttonMessage);
     }
 
     public function addWarning($header = null, $title = null, $message = null, $buttonMessage = null)
     {
-        $this->_add('warning', $header, $title, $message, $buttonMessage);
+        return $this->_add('warning', $header, $title, $message, $buttonMessage);
     }
 
     public function addError($header = null, $title = null, $message = null, $buttonMessage = null)
     {
-        $this->_add('error', $header, $title, $message, $buttonMessage);
+        return $this->_add('error', $header, $title, $message, $buttonMessage);
     }
 
     public function add($header = null, $title = null, $message = null, $buttonMessage = null)
     {
-        $this->_add('message', $header, $title, $message, $buttonMessage);
+        return $this->_add('message', $header, $title, $message, $buttonMessage);
     }
 
     private function _add($type, $header = null, $title = null, $message = null, $buttonMessage = null)
     {
+        if(!$this->flashBag && $this->session->isStarted())
+            $this->flashBag = $this->session->getFlashBag ();
+
         if($this->flashBag)
+        {
             $this->flashBag->add($type, new FlashMessage($header, $title, $message, $buttonMessage));
+            return true;
+        }
+
+        return false;
     }
 
     /**
