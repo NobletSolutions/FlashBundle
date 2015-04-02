@@ -1,48 +1,40 @@
-{% for flashMessage in flashbag.get('error') %}
-    <div class="bannerMessage critical">
-        <h3>{{flashMessage.header}}</h3>
-        <div class="messageContent">
-          <h4>{{flashMessage.title}}</h4>
-          <p>{{flashMessage.message}}</p>
-          <div class="messageCommit">
-             <button>{{flashMessage.buttonMessage}}</button>
-          </div>
-        </div>
+<div class="messages cleafix col-xs-12">
+    <div class="col-sm-9 col-md-9 col-lg-9">
+        {% for flashMessage in app.session.flashbag.get('error') %}
+            <div class="alert alert-block alert-danger">
+                <button type="button" class="close" data-dismiss="alert">
+                    <i class="fa fa-times"></i>
+                </button>
+                <i class="fa fa-times red"></i>
+                {{flashMessage.message}}
+            </div>
+        {% endfor %}
+        {% for flashMessage in app.session.flashbag.get('warning') %}
+            <div class="alert alert-block alert-warning">
+                <button type="button" class="close" data-dismiss="alert">
+                    <i class="fa fa-times"></i>
+                </button>
+                <i class="fa fa-check green"></i>
+                {{flashMessage.message}}
+            </div>
+        {% endfor %}
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            <div class="alert alert-block alert-success">
+                <button type="button" class="close" data-dismiss="alert">
+                    <i class="fa fa-times"></i>
+                </button>
+                <i class="fa fa-check green"></i>
+                {{flashMessage.message}}
+            </div>
+        {% endfor %}
+        {% for flashMessage in app.session.flashbag.get('message') %}
+            <div class="alert alert-block">
+                <button type="button" class="close" data-dismiss="alert">
+                    <i class="icon-remove"></i>
+                </button>
+                <i class="fa fa-check green"></i>
+                {{flashMessage.message}}
+            </div>        
+        {% endfor %}
     </div>
-{% endfor %}
-{% for flashMessage in flashbag.get('warning') %}
-    <div class="bannerMessage error">
-        <h3>{{flashMessage.header}}</h3>
-        <div class="messageContent">
-          <h4>{{flashMessage.title}}</h4>
-          <p>{{flashMessage.message}}</p>
-          <div class="messageCommit">
-             <button>{{flashMessage.buttonMessage}}</button>
-          </div>
-        </div>
-    </div>
-{% endfor %}
-{% for flashMessage in flashbag.get('success') %}
-    <div class="bannerMessage success">
-        <h3>{{flashMessage.header}}</h3>
-        <div class="messageContent">
-          <h4>{{flashMessage.title}}</h4>
-          <p>{{flashMessage.message}}</p>
-          <div class="messageCommit">
-             <button>{{flashMessage.buttonMessage}}</button>
-          </div>
-        </div>
-    </div>
-{% endfor %}
-{% for flashMessage in flashbag.get('message') %}
-    <div class="bannerMessage">
-        <h3>{{flashMessage.header}}</h3>
-        <div class="messageContent">
-          <h4>{{flashMessage.title}}</h4>
-          <p>{{flashMessage.message}}</p>
-          <div class="messageCommit">
-             <button>{{flashMessage.buttonMessage}}</button>
-          </div>
-        </div>
-    </div>
-{% endfor %}
+</div>
