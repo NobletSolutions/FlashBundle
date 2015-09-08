@@ -3,6 +3,7 @@
     "type": "symfony-bundle",
     "description": "This Bundle provides a flash message service and twig renderer",
     "minimum-stability": "stable",
+    "license": "MIT",
     "authors": [
         {
             "name": "Nathanael David Noblet",
