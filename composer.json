@@ -21,8 +21,7 @@
     },
 
     "autoload": {
-        "psr-0": { "NS\\FlashBundle": "" }
-    },
-    "target-dir": "NS/FlashBundle"
+        "psr-4": { "NS\\FlashBundle\\": "" }
+    }
 }
 
