@@ -4,6 +4,6 @@ parameters:
 services:
   ns_flash:
     class: NS\FlashBundle\Service\Messages
-    arguments: [ "@twig", "@session", %ns_flash.template% ]
+    arguments: [ "@session", %ns_flash.template% ]
     tags:
       - { name: twig.extension }

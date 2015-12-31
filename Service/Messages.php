@@ -29,18 +29,12 @@ class Messages extends \Twig_Extension implements MessageStore
     private $template;
 
     /**
-     * @var \Twig_Environment
-     */
-    private $environment;
-
-    /**
      * @param \Twig_Environment $twigEnvironment
      * @param Session $session
      * @param string $template
      */
-    public function __construct(\Twig_Environment $twigEnvironment, Session $session, $template)
+    public function __construct(Session $session, $template)
     {
-        $this->environment = $twigEnvironment;
         $this->session  = $session;
         $this->flashBag = ($session->isStarted()) ? $session->getFlashBag() : null;
         $this->template = $template;
@@ -127,7 +121,7 @@ class Messages extends \Twig_Extension implements MessageStore
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('flash_messages', array($this, 'outputMessages'), array('is_safe' => array('html')))
+            new \Twig_SimpleFunction('flash_messages', array($this, 'outputMessages'), array('needs_environment'=>true, 'is_safe' => array('html')))
         );
     }
 
@@ -135,9 +129,9 @@ class Messages extends \Twig_Extension implements MessageStore
      *
      * @return string
      */
-    public function outputMessages()
+    public function outputMessages($environment)
     {
-        return $this->environment->render($this->template, array('flashbag' => $this->flashBag));
+        return $environment->render($this->template, array('flashbag' => $this->flashBag));
     }
 
     /**
