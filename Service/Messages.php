@@ -26,17 +26,15 @@ class Messages extends \Twig_Extension implements MessageStore
     /**
      * @var string
      */
-    private $template;
+    private $template = 'NSFlashBundle:Messages:index.html.twig';
 
     /**
-     * @param \Twig_Environment $twigEnvironment
      * @param Session $session
      * @param string $template
      */
     public function __construct(Session $session, $template)
     {
         $this->session  = $session;
-        $this->flashBag = ($session->isStarted()) ? $session->getFlashBag() : null;
         $this->template = $template;
     }
 
@@ -126,12 +124,12 @@ class Messages extends \Twig_Extension implements MessageStore
     }
 
     /**
-     *
+     * @param \Twig_Environment $environment
      * @return string
      */
-    public function outputMessages($environment)
+    public function outputMessages(\Twig_Environment $environment)
     {
-        return $environment->render($this->template, array('flashbag' => $this->flashBag));
+        return $environment->render($this->template);
     }
 
     /**
