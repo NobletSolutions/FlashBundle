@@ -1,3 +1,4 @@
+{% if app.session.flashBag.peekAll|length > 0 %}
 <div class="modal fade openOnLoad" tabindex="-1" role="dialog" id="modal-flash-message">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -65,3 +66,4 @@
         </div>
     </div>
 </div>
+{% endif %}
