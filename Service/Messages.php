@@ -29,6 +29,11 @@ class Messages extends \Twig_Extension implements MessageStore
     private $template = 'NSFlashBundle:Messages:index.html.twig';
 
     /**
+     * @var string
+     */
+    private $modalTemplate = 'NSFlashBundle:Messages:modal.html.twig';
+
+    /**
      * @param Session $session
      * @param string $template
      */
@@ -119,7 +124,8 @@ class Messages extends \Twig_Extension implements MessageStore
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('flash_messages', array($this, 'outputMessages'), array('needs_environment'=>true, 'is_safe' => array('html')))
+            new \Twig_SimpleFunction('flash_messages', array($this, 'outputMessages'), array('needs_environment'=>true, 'is_safe' => array('html'))),
+            new \Twig_SimpleFunction('modal_flash_messages', array($this,'outputModalMessages'),array('needs_environment'=>true,'is_safe'=>array('html'))),
         );
     }
 
@@ -130,6 +136,15 @@ class Messages extends \Twig_Extension implements MessageStore
     public function outputMessages(\Twig_Environment $environment)
     {
         return $environment->render($this->template);
+    }
+
+    /**
+     * @param \Twig_Environment $environment
+     * @return string
+     */
+    public function outputModalMessages(\Twig_Environment $environment)
+    {
+        return $environment->render($this->modalTemplate);
     }
 
     /**

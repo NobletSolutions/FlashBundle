@@ -1,0 +1,67 @@
+<div class="modal fade" tabindex="-1" role="dialog" id="modal-flash-message">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Alert Messages</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-9 col-md-9 col-lg-9">
+                        {% for flashMessage in app.session.flashbag.get('error') %}
+                            <div class="alert alert-block alert-danger clearfix">
+                                <div class="col-sm-1">
+                                    <i class="ace-icon fa fa-exclamation-triangle red bigger-200"></i>
+                                </div>
+                                <div class="col-sm-11">
+                                    <h3 class="smaller lighter no-margin-top">{{ flashMessage.header }}</h3>
+                                    <h4 class="smaller lighter">{{ flashMessage.title }}</h4>
+                                    {{ flashMessage.message }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                        {% for flashMessage in app.session.flashbag.get('warning') %}
+                            <div class="alert alert-block alert-warning clearfix">
+                                <div class="col-sm-1">
+                                    <i class="ace-icon fa fa-bell orange bigger-200"></i>
+                                </div>
+                                <div class="col-sm-11">
+                                    <h3 class="smaller lighter no-margin-top">{{ flashMessage.header }}</h3>
+                                    <h4 class="smaller lighter">{{ flashMessage.title }}</h4>
+                                    {{ flashMessage.message }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                        {% for flashMessage in app.session.flashbag.get('success') %}
+                            <div class="alert alert-block alert-success clearfix">
+                                <div class="col-sm-1">
+                                    <i class="ace-icon fa fa-check green bigger-200"></i>
+                                </div>
+                                <div class="col-sm-11">
+                                    <h3 class="smaller lighter no-margin-top">{{ flashMessage.header }}</h3>
+                                    <h4 class="smaller lighter">{{ flashMessage.title }}</h4>
+                                    {{ flashMessage.message }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                        {% for flashMessage in app.session.flashbag.get('message') %}
+                            <div class="alert alert-info clearfix">
+                                <div class="col-sm-1">
+                                    <i class="ace-icon fa fa-info-circle blue bigger-200"></i>
+                                </div>
+                                <div class="col-sm-11">
+                                    <h3 class="smaller lighter no-margin-top">{{ flashMessage.header }}</h3>
+                                    <h4 class="smaller lighter">{{ flashMessage.title }}</h4>
+                                    {{ flashMessage.message }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
