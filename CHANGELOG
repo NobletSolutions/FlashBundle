@@ -3,5 +3,6 @@ VERSION 1  INITIAL RELEASE
 ==========================
 
    Version 1.0 - Initial release
+      22/03/2016 13:50  1.0.2  Modal flash messages
       31/12/2015 13:47  1.0.1  Fixed twig environment injection
       03/12/2015 16:52  1.0.0  initial release
