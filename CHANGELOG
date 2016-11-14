@@ -3,6 +3,7 @@ VERSION 1  INITIAL RELEASE
 ==========================
 
    Version 1.0 - Initial release
+      14/11/2016 14:32  1.0.4  Removed deprecation warnings"
       04/04/2016 09:25  1.0.3  translate messages by default
       22/03/2016 13:50  1.0.2  Modal flash messages
       31/12/2015 13:47  1.0.1  Fixed twig environment injection
