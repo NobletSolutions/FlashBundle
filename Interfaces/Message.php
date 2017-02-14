@@ -24,3 +24,4 @@ interface Message
 
     public function setHeader($header);
 }
+
