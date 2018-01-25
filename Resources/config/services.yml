@@ -2,8 +2,8 @@ parameters:
   ns_flash.template: NSFlashBundle:Messages:index.html.twig
 
 services:
-  ns_flash:
-    class: NS\FlashBundle\Service\Messages
+  NS\FlashBundle\Service\Messages:
+    alias: ns_flash
     arguments: [ "@session", "%ns_flash.template%" ]
     tags:
       - { name: twig.extension }

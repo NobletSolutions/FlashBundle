@@ -2,7 +2,7 @@
 
 namespace NS\FlashBundle\Service;
 
-use \Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use NS\FlashBundle\Interfaces\MessageStore;
 use NS\FlashBundle\Model\FlashMessage;
 
@@ -34,10 +34,10 @@ class Messages extends \Twig_Extension implements MessageStore
     private $modalTemplate = 'NSFlashBundle:Messages:modal.html.twig';
 
     /**
-     * @param Session $session
+     * @param SessionInterface $session
      * @param string $template
      */
-    public function __construct(Session $session, $template)
+    public function __construct(SessionInterface $session, $template)
     {
         $this->session  = $session;
         $this->template = $template;
