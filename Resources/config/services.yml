@@ -8,6 +8,9 @@ services:
     tags:
       - { name: twig.extension }
 
+  NS\FlashBundle\Interfaces\MessageStore:
+    alias: NS\FlashBundle\Service\Messages
+
   ns_flash:
     alias: NS\FlashBundle\Service\Messages
     public: true
