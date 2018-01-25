@@ -3,7 +3,11 @@ parameters:
 
 services:
   NS\FlashBundle\Service\Messages:
-    alias: ns_flash
+    public: false
     arguments: [ "@session", "%ns_flash.template%" ]
     tags:
       - { name: twig.extension }
+
+  ns_flash:
+    alias: NS\FlashBundle\Service\Messages
+    public: true
