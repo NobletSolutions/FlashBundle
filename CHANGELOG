@@ -3,6 +3,7 @@ VERSION 1  INITIAL RELEASE
 ==========================
 
    Version 1.0 - Initial release
+      09/02/2018 11:40  1.0.9  Updated sf3.2 support fix
       25/01/2018 12:54  1.0.8  Improved SF 4.0 support
       25/01/2018 11:24  1.0.7  Support SF4.0
       17/08/2017 23:08  1.0.6  Fix variable access when null
