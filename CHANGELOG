@@ -3,6 +3,7 @@ VERSION 1  INITIAL RELEASE
 ==========================
 
    Version 1.0 - Initial release
+      13/06/2018 14:49  1.0.10  SF4 requires framework-bundle
       09/02/2018 11:40  1.0.9  Updated sf3.2 support fix
       25/01/2018 12:54  1.0.8  Improved SF 4.0 support
       25/01/2018 11:24  1.0.7  Support SF4.0
