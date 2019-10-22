@@ -22,7 +22,7 @@ class Messages extends AbstractExtension implements MessageStore
     private $template;
 
     /** @var string */
-    private $modalTemplate = 'NSFlash/Messages/modal.html.twig';
+    private $modalTemplate = '@NSFlash/Messages/modal.html.twig';
 
     /**
      * @param SessionInterface $session
