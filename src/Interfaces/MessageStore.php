@@ -2,10 +2,6 @@
 
 namespace NS\FlashBundle\Interfaces;
 
-/**
- *
- * @author gnat
- */
 interface MessageStore
 {
     public function addSuccess($header = null, $title = null, $message = null, $buttonMessage = null);

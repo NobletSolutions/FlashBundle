@@ -2,36 +2,27 @@
 
 namespace NS\FlashBundle\Service;
 
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use NS\FlashBundle\Interfaces\MessageStore;
 use NS\FlashBundle\Model\FlashMessage;
+use Twig\Environment;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-/**
- * Description of Messages
- *
- * @author gnat
- */
-class Messages extends \Twig_Extension implements MessageStore
+class Messages extends AbstractExtension implements MessageStore
 {
-    /**
-     * @var Session
-     */
+    /** @var SessionInterface */
     private $session;
 
-    /**
-     * @var null
-     */
+    /** @var FlashBagInterface|null */
     private $flashBag;
 
-    /**
-     * @var string
-     */
-    private $template = 'NSFlashBundle:Messages:index.html.twig';
+    /** @var string */
+    private $template;
 
-    /**
-     * @var string
-     */
-    private $modalTemplate = 'NSFlashBundle:Messages:modal.html.twig';
+    /** @var string */
+    private $modalTemplate = 'NSFlash/Messages/modal.html.twig';
 
     /**
      * @param SessionInterface $session
@@ -41,6 +32,14 @@ class Messages extends \Twig_Extension implements MessageStore
     {
         $this->session  = $session;
         $this->template = $template;
+    }
+
+    public function getFunctions(): array
+    {
+        return array(
+            new TwigFunction('flash_messages', array($this, 'outputMessages'), array('needs_environment'=>true, 'is_safe' => array('html'))),
+            new TwigFunction('modal_flash_messages', array($this,'outputModalMessages'),array('needs_environment'=>true,'is_safe'=>array('html'))),
+        );
     }
 
     /**
@@ -118,40 +117,14 @@ class Messages extends \Twig_Extension implements MessageStore
         return false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getFunctions()
-    {
-        return array(
-            new \Twig_SimpleFunction('flash_messages', array($this, 'outputMessages'), array('needs_environment'=>true, 'is_safe' => array('html'))),
-            new \Twig_SimpleFunction('modal_flash_messages', array($this,'outputModalMessages'),array('needs_environment'=>true,'is_safe'=>array('html'))),
-        );
-    }
 
-    /**
-     * @param \Twig_Environment $environment
-     * @return string
-     */
-    public function outputMessages(\Twig_Environment $environment)
+    public function outputMessages(Environment $environment): string
     {
         return $environment->render($this->template);
     }
 
-    /**
-     * @param \Twig_Environment $environment
-     * @return string
-     */
-    public function outputModalMessages(\Twig_Environment $environment)
+    public function outputModalMessages(Environment $environment): string
     {
         return $environment->render($this->modalTemplate);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'flash_message';
     }
 }
