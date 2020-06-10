@@ -17,10 +17,24 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
+        /**
+         * Instantiating a new TreeBuilder without a constructor arg is deprecated in SF4 and removed in SF5
+         */
+        if(method_exists(TreeBuilder::class, '__construct'))
+        {
+            return new TreeBuilder('ns_flash');
+        }
+
+        /**
+         * Included for backward-compatibility with SF3
+         */
+        $treeBuilder = new TreeBuilder();
+        $rootNode = $treeBuilder->root('ns_flash');
+
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
         // more information on that topic.
 
-        return new TreeBuilder('ns_flash');
+        return $treeBuilder;
     }
 }
