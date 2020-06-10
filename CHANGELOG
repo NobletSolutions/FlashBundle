@@ -2,6 +2,9 @@
 VERSION 2  SF4 VERSION
 ======================
 
+   Version 2.1 - Bump symfony version
+      10/06/2020 12:46  2.1.0  initial release
+
    Version 2.0 - SF4 version
       22/10/2019 17:17  2.0.3  fixed modal template path
       22/10/2019 17:14  2.0.2  Fixed bad services.yml file
