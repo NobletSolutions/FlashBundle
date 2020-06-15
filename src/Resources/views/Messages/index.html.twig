@@ -1,15 +1,15 @@
 {% macro message(flashMessage, type, icon) %}
     <div class="alert alert-block alert-{{ type }} clearfix">
         <div class="row">
-            <div class="col-sm-1">
+            <div class="col-sm-1 col-1">
                 <i class="ace-icon fa {{ icon }}"></i>
             </div>
-            <div class="col-sm-10">
+            <div class="col-sm-10 col-10">
                 <h3 class="smaller lighter no-margin-top">{{ flashMessage.header ? flashMessage.header|trans : '' }}</h3>
                 <h4 class="smaller lighter">{{ flashMessage.title ? flashMessage.title|trans : '' }}</h4>
                 {{ flashMessage.message ? flashMessage.message|trans : '' }}
             </div>
-            <div class="col-sm-1">
+            <div class="col-sm-1 col-1">
                 <button type="button" class="close" data-dismiss="alert">
                     <i class="fa fa-times"></i>
                 </button>
@@ -18,21 +18,19 @@
     </div>
 {% endmacro %}
 
-<div class="messages cleafix col-xs-12">
-    <div class="col-12">
-        {% if app.session and app.session.flashbag %}
-            {% for flashMessage in app.session.flashbag.get('error') %}
-                {{ _self.message(flashMessage, 'danger', 'fa-exclamation-triangle red bigger-200') }}
-            {% endfor %}
-            {% for flashMessage in app.session.flashbag.get('warning') %}
-                {{ _self.message(flashMessage, 'warning', 'fa-bell orange bigger-200') }}
-            {% endfor %}
-            {% for flashMessage in app.session.flashbag.get('success') %}
-                {{ _self.message(flashMessage, 'success', 'fa-check green bigger-200') }}
-            {% endfor %}
-            {% for flashMessage in app.session.flashbag.get('message') %}
-                {{ _self.message(flashMessage, 'info', 'fa-info-circle blue bigger-200') }}
-            {% endfor %}
-        {% endif %}
-    </div>
+<div class="messages cleafix col-xs-12 col-12">
+    {% if app.session and app.session.flashbag %}
+        {% for flashMessage in app.session.flashbag.get('error') %}
+            {{ _self.message(flashMessage, 'danger', 'fa-exclamation-triangle red bigger-200') }}
+        {% endfor %}
+        {% for flashMessage in app.session.flashbag.get('warning') %}
+            {{ _self.message(flashMessage, 'warning', 'fa-bell orange bigger-200') }}
+        {% endfor %}
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            {{ _self.message(flashMessage, 'success', 'fa-check green bigger-200') }}
+        {% endfor %}
+        {% for flashMessage in app.session.flashbag.get('message') %}
+            {{ _self.message(flashMessage, 'info', 'fa-info-circle blue bigger-200') }}
+        {% endfor %}
+    {% endif %}
 </div>
