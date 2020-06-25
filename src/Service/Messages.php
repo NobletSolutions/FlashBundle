@@ -43,11 +43,10 @@ class Messages extends AbstractExtension implements MessageStore
     }
 
     /**
-     *
-     * @param string $header
-     * @param string $title
-     * @param string $message
-     * @param string $buttonMessage
+     * @param string|null $header
+     * @param string|null $title
+     * @param string|null $message
+     * @param string|null $buttonMessage
      * @return boolean
      */
     public function addSuccess($header = null, $title = null, $message = null, $buttonMessage = null)
@@ -56,11 +55,10 @@ class Messages extends AbstractExtension implements MessageStore
     }
 
     /**
-     *
-     * @param string $header
-     * @param string $title
-     * @param string $message
-     * @param string $buttonMessage
+     * @param string|null $header
+     * @param string|null $title
+     * @param string|null $message
+     * @param string|null $buttonMessage
      * @return boolean
      */
     public function addWarning($header = null, $title = null, $message = null, $buttonMessage = null)
@@ -69,11 +67,10 @@ class Messages extends AbstractExtension implements MessageStore
     }
 
     /**
-     *
-     * @param string $header
-     * @param string $title
-     * @param string $message
-     * @param string $buttonMessage
+     * @param string|null $header
+     * @param string|null $title
+     * @param string|null $message
+     * @param string|null $buttonMessage
      * @return boolean
      */
     public function addError($header = null, $title = null, $message = null, $buttonMessage = null)
@@ -82,11 +79,10 @@ class Messages extends AbstractExtension implements MessageStore
     }
 
     /**
-     *
-     * @param string $header
-     * @param string $title
-     * @param string $message
-     * @param string $buttonMessage
+     * @param string|null $header
+     * @param string|null $title
+     * @param string|null $message
+     * @param string|null $buttonMessage
      * @return boolean
      */
     public function add($header = null, $title = null, $message = null, $buttonMessage = null)
@@ -95,11 +91,11 @@ class Messages extends AbstractExtension implements MessageStore
     }
 
     /**
-     * @param $type
-     * @param null $header
-     * @param null $title
-     * @param null $message
-     * @param null $buttonMessage
+     * @param string $type
+     * @param string|null $header
+     * @param string|null $title
+     * @param string|null $message
+     * @param string|null $buttonMessage
      * @return bool
      */
     private function addMessage($type, $header = null, $title = null, $message = null, $buttonMessage = null)
@@ -116,7 +112,6 @@ class Messages extends AbstractExtension implements MessageStore
 
         return false;
     }
-
 
     public function outputMessages(Environment $environment): string
     {
