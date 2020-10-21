@@ -1,26 +1,31 @@
 {
-    "name": "ns/flash-bundle",
-    "type": "symfony-bundle",
-    "description": "This Bundle provides a flash message service and twig renderer",
-    "minimum-stability": "stable",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Nathanael David Noblet",
-            "email": "nathanael@noblet.ca"
-        },
-        {
-            "name": "Mark Woynarski",
-            "email": "mark.woynarski@nobletdesign.com"
-        }
-    ],
-    "require": {
-        "php":                     ">=7.0",
-	    "symfony/http-foundation": "^4.0|^5.0",
-        "twig/twig":               "^2.0|^3.0"
+  "name": "ns/flash-bundle",
+  "type": "symfony-bundle",
+  "description": "This Bundle provides a flash message service and twig renderer",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Nathanael David Noblet",
+      "email": "nathanael@noblet.ca"
     },
-    "autoload": {
-        "psr-4": { "NS\\FlashBundle\\": "src" }
+    {
+      "name": "Mark Woynarski",
+      "email": "mark.woynarski@nobletdesign.com"
     }
+  ],
+  "require": {
+    "php": ">=7.0",
+    "symfony/http-foundation": "^4.0|^5.0",
+    "symfony/http-kernel": "^4.0|^5.0",
+    "symfony/dependency-injection": "^4.0|^5.0",
+    "symfony/config": "^4.0|^5.0",
+    "twig/twig": "^2.0|^3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "NS\\FlashBundle\\": "src"
+    }
+  }
 }
 
