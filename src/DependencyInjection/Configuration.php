@@ -7,7 +7,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class Configuration implements ConfigurationInterface
 {
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         /**
          * Instantiating a new TreeBuilder without a constructor arg is deprecated in SF4 and removed in SF5
@@ -25,6 +25,11 @@ class Configuration implements ConfigurationInterface
             $treeBuilder = new TreeBuilder();
             $rootNode = $treeBuilder->root('ns_flash');
         }
+
+        $rootNode
+            ->children()
+                ->scalarNode('template')->defaultValue('@NSFlash/Messages/index.html.twig')->cannotBeEmpty()->end()
+            ->end();
 
         return $treeBuilder;
     }

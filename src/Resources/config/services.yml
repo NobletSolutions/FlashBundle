@@ -1,6 +1,3 @@
-parameters:
-  ns_flash.template: '@@NSFlash/Messages/index.html.twig'
-
 services:
   NS\FlashBundle\Service\Messages:
     class: NS\FlashBundle\Service\Messages
