@@ -26,6 +26,8 @@
     "psr-4": {
       "NS\\FlashBundle\\": "src"
     }
+  },
+  "require-dev": {
+    "liip/rmt": "^1.6"
   }
 }
-
