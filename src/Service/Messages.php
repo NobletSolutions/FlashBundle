@@ -2,18 +2,18 @@
 
 namespace NS\FlashBundle\Service;
 
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use NS\FlashBundle\Interfaces\MessageStore;
 use NS\FlashBundle\Model\FlashMessage;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class Messages extends AbstractExtension implements MessageStore
 {
-    /** @var SessionInterface */
-    private $session;
+    /** @var RequestStack */
+    private $requestStack;
 
     /** @var FlashBagInterface|null */
     private $flashBag;
@@ -24,22 +24,18 @@ class Messages extends AbstractExtension implements MessageStore
     /** @var string */
     private $modalTemplate = '@NSFlash/Messages/modal.html.twig';
 
-    /**
-     * @param SessionInterface $session
-     * @param string $template
-     */
-    public function __construct(SessionInterface $session, $template)
+    public function __construct(RequestStack $requestStack, string $template)
     {
-        $this->session  = $session;
-        $this->template = $template;
+        $this->requestStack = $requestStack;
+        $this->template     = $template;
     }
 
     public function getFunctions(): array
     {
-        return array(
-            new TwigFunction('flash_messages', array($this, 'outputMessages'), array('needs_environment'=>true, 'is_safe' => array('html'))),
-            new TwigFunction('modal_flash_messages', array($this,'outputModalMessages'),array('needs_environment'=>true,'is_safe'=>array('html'))),
-        );
+        return [
+            new TwigFunction('flash_messages', [$this, 'outputMessages'], ['needs_environment' => true, 'is_safe' => ['html']]),
+            new TwigFunction('modal_flash_messages', [$this, 'outputModalMessages'], ['needs_environment' => true, 'is_safe' => ['html']]),
+        ];
     }
 
     /**
@@ -47,6 +43,7 @@ class Messages extends AbstractExtension implements MessageStore
      * @param string|null $title
      * @param string|null $message
      * @param string|null $buttonMessage
+     *
      * @return boolean
      */
     public function addSuccess($header = null, $title = null, $message = null, $buttonMessage = null)
@@ -59,6 +56,7 @@ class Messages extends AbstractExtension implements MessageStore
      * @param string|null $title
      * @param string|null $message
      * @param string|null $buttonMessage
+     *
      * @return boolean
      */
     public function addWarning($header = null, $title = null, $message = null, $buttonMessage = null)
@@ -71,6 +69,7 @@ class Messages extends AbstractExtension implements MessageStore
      * @param string|null $title
      * @param string|null $message
      * @param string|null $buttonMessage
+     *
      * @return boolean
      */
     public function addError($header = null, $title = null, $message = null, $buttonMessage = null)
@@ -83,6 +82,7 @@ class Messages extends AbstractExtension implements MessageStore
      * @param string|null $title
      * @param string|null $message
      * @param string|null $buttonMessage
+     *
      * @return boolean
      */
     public function add($header = null, $title = null, $message = null, $buttonMessage = null)
@@ -91,17 +91,18 @@ class Messages extends AbstractExtension implements MessageStore
     }
 
     /**
-     * @param string $type
+     * @param string      $type
      * @param string|null $header
      * @param string|null $title
      * @param string|null $message
      * @param string|null $buttonMessage
+     *
      * @return bool
      */
     private function addMessage($type, $header = null, $title = null, $message = null, $buttonMessage = null)
     {
-        if (!$this->flashBag && $this->session->isStarted()) {
-            $this->flashBag = $this->session->getFlashBag();
+        if (!$this->flashBag && $this->requestStack->getSession()->isStarted()) {
+            $this->flashBag = $this->requestStack->getSession()->getFlashBag();
         }
 
         if ($this->flashBag) {

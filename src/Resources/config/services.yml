@@ -2,7 +2,7 @@ services:
   NS\FlashBundle\Service\Messages:
     class: NS\FlashBundle\Service\Messages
     public: false
-    arguments: [ "@session", "%ns_flash.template%" ]
+    arguments: [ "@request_stack", "%ns_flash.template%" ]
     tags:
       - { name: twig.extension }
 
