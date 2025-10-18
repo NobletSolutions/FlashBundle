@@ -3,6 +3,7 @@ VERSION 3  REMOVE SF4 SUPPORT
 =============================
 
    Version 3.1 - Allow SF6
+      18/10/2025 14:57  4.0.1  Continue to allow SF6 install
       10/10/2022 08:51  3.1.0  initial release
 
    Version 3.0 - Remove SF4 support
