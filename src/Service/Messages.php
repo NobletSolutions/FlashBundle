@@ -12,17 +12,13 @@ use Twig\TwigFunction;
 
 class Messages extends AbstractExtension implements MessageStore
 {
-    /** @var RequestStack */
-    private $requestStack;
+    private RequestStack $requestStack;
 
-    /** @var FlashBagInterface|null */
-    private $flashBag;
+    private ?FlashBagInterface $flashBag = null;
 
-    /** @var string */
-    private $template;
+    private string $template;
 
-    /** @var string */
-    private $modalTemplate = '@NSFlash/Messages/modal.html.twig';
+    private string $modalTemplate = '@NSFlash/Messages/modal.html.twig';
 
     public function __construct(RequestStack $requestStack, string $template)
     {
@@ -38,68 +34,32 @@ class Messages extends AbstractExtension implements MessageStore
         ];
     }
 
-    /**
-     * @param string|null $header
-     * @param string|null $title
-     * @param string|null $message
-     * @param string|null $buttonMessage
-     *
-     * @return boolean
-     */
-    public function addSuccess($header = null, $title = null, $message = null, $buttonMessage = null)
+    public function addSuccess(?string $header = null, ?string $title = null, ?string $message = null, ?string $buttonMessage = null): bool
     {
         return $this->addMessage('success', $header, $title, $message, $buttonMessage);
     }
 
-    /**
-     * @param string|null $header
-     * @param string|null $title
-     * @param string|null $message
-     * @param string|null $buttonMessage
-     *
-     * @return boolean
-     */
-    public function addWarning($header = null, $title = null, $message = null, $buttonMessage = null)
+    public function addWarning(?string $header = null, ?string $title = null, ?string $message = null, ?string $buttonMessage = null): bool
     {
         return $this->addMessage('warning', $header, $title, $message, $buttonMessage);
     }
 
-    /**
-     * @param string|null $header
-     * @param string|null $title
-     * @param string|null $message
-     * @param string|null $buttonMessage
-     *
-     * @return boolean
-     */
-    public function addError($header = null, $title = null, $message = null, $buttonMessage = null)
+    public function addError(?string $header = null, ?string $title = null, ?string $message = null, ?string $buttonMessage = null): bool
     {
         return $this->addMessage('error', $header, $title, $message, $buttonMessage);
     }
 
-    /**
-     * @param string|null $header
-     * @param string|null $title
-     * @param string|null $message
-     * @param string|null $buttonMessage
-     *
-     * @return boolean
-     */
-    public function add($header = null, $title = null, $message = null, $buttonMessage = null)
+    public function addInfo(?string $header = null, ?string $title = null, ?string $message = null, ?string $buttonMessage = null): bool
+    {
+        return $this->addMessage('info', $header, $title, $message, $buttonMessage);
+    }
+
+    public function add(?string $header = null, ?string $title = null, ?string $message = null, ?string $buttonMessage = null): bool
     {
         return $this->addMessage('message', $header, $title, $message, $buttonMessage);
     }
 
-    /**
-     * @param string      $type
-     * @param string|null $header
-     * @param string|null $title
-     * @param string|null $message
-     * @param string|null $buttonMessage
-     *
-     * @return bool
-     */
-    private function addMessage($type, $header = null, $title = null, $message = null, $buttonMessage = null)
+    private function addMessage(string $type, ?string $header = null, ?string $title = null, ?string $message = null, ?string $buttonMessage = null): bool
     {
         if (!$this->flashBag && $this->requestStack->getSession()->isStarted()) {
             $this->flashBag = $this->requestStack->getSession()->getFlashBag();

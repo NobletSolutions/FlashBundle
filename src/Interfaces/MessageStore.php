@@ -4,8 +4,9 @@ namespace NS\FlashBundle\Interfaces;
 
 interface MessageStore
 {
-    public function addSuccess($header = null, $title = null, $message = null, $buttonMessage = null);
-    public function addWarning($header = null, $title = null, $message = null, $buttonMessage = null);
-    public function addError($header = null, $title = null, $message = null, $buttonMessage = null);
-    public function add($header = null, $title = null, $message = null, $buttonMessage = null);
+    public function addSuccess(?string $header = null, ?string $title = null, ?string $message = null, ?string $buttonMessage = null): bool;
+    public function addWarning(?string $header = null, ?string $title = null, ?string $message = null, ?string $buttonMessage = null): bool;
+    public function addError(?string $header = null, ?string $title = null, ?string $message = null, ?string $buttonMessage = null): bool;
+    public function addInfo(?string $header = null, ?string $title = null, ?string $message = null, ?string $buttonMessage = null): bool;
+    public function add(?string $header = null, ?string $title = null, ?string $message = null, ?string $buttonMessage = null): bool;
 }
